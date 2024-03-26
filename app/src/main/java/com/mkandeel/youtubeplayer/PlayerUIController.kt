@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.PopupMenu
 
 import android.widget.RelativeLayout
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.customui.utils.FadeViewHelper
@@ -39,6 +41,8 @@ class PlayerUIController(
         val seekbar = view.findViewById<YouTubePlayerSeekBar>(R.id.seekBarPlayer)
         val fullscreen = view.findViewById<ImageButton>(R.id.btn_fullscreen)
         val pause = view.findViewById<ImageButton>(R.id.btn_pause)
+        val menu = view.findViewById<ImageButton>(R.id.more_icon)
+
         player.addListener(seekbar)
 
         seekbar.youtubePlayerSeekBarListener = object : YouTubePlayerSeekBarListener {
@@ -47,6 +51,33 @@ class PlayerUIController(
                 current = (time/60).toInt()
                 listener.onVideoStateChanged(false,current)
             }
+        }
+
+        menu.setOnClickListener {
+            //player.setPlaybackRate(PlayerConstants.PlaybackRate.RATE_2)
+            val popUpMenu = PopupMenu(context,it)
+            popUpMenu.menuInflater.inflate(R.menu.menu,popUpMenu.menu)
+            popUpMenu.setOnMenuItemClickListener {
+                when(it.itemId) {
+                    R.id.spead_0_25 -> {
+                        player.setPlaybackRate(PlayerConstants.PlaybackRate.RATE_0_25)
+                    }
+                    R.id.spead_0_5 -> {
+                        player.setPlaybackRate(PlayerConstants.PlaybackRate.RATE_0_5)
+                    }
+                    R.id.spead_1 -> {
+                        player.setPlaybackRate(PlayerConstants.PlaybackRate.RATE_1)
+                    }
+                    R.id.spead_1_5 -> {
+                        player.setPlaybackRate(PlayerConstants.PlaybackRate.RATE_1_5)
+                    }
+                    R.id.spead_2 -> {
+                        player.setPlaybackRate(PlayerConstants.PlaybackRate.RATE_2)
+                    }
+                }
+                true
+            }
+            popUpMenu.show()
         }
 
         pause.setOnClickListener {

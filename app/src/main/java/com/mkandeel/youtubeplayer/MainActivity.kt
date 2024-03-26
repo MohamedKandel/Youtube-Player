@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), VideoStateChanged {
         Toast.makeText(this,"${(tracker.currentSecond/60).toInt()}",Toast.LENGTH_SHORT).show()
     }
 
-    // listener for pause and resume video and get current time
+    // listener for pause and resume video and get current time in minutes
     override fun onVideoStateChanged(isPaused: Boolean, currentTime: Int) {
         Log.v("Video State", "$isPaused at $currentTime")
     }
