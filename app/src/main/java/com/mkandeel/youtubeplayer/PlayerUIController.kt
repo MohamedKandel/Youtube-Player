@@ -20,14 +20,15 @@ class PlayerUIController(
     ui: View,
     private val player: YouTubePlayer,
     private val playerView: YouTubePlayerView,
+    private var tracker: YouTubePlayerTracker,
     private val context: Context,
     private val listener: VideoStateChanged
 ) : AbstractYouTubePlayerListener() {
-    private var tracker: YouTubePlayerTracker = YouTubePlayerTracker()
     private var isFullScreen = false
-    private var current = 0f
+    private var current = 0
 
     init {
+        //tracker = YouTubePlayerTracker()
         player.addListener(tracker)
         initViews(ui)
     }
@@ -43,7 +44,8 @@ class PlayerUIController(
         seekbar.youtubePlayerSeekBarListener = object : YouTubePlayerSeekBarListener {
             override fun seekTo(time: Float) {
                 player.seekTo(time)
-                current = time
+                current = (time/60).toInt()
+                listener.onVideoStateChanged(false,current)
             }
         }
 
@@ -51,12 +53,12 @@ class PlayerUIController(
             if (tracker.state == PlayerConstants.PlayerState.PLAYING) {
                 pause.setImageResource(R.drawable.play_icon)
                 player.pause()
-                current = tracker.currentSecond
+                current = (tracker.currentSecond/60).toInt()
                 listener.onVideoStateChanged(true, current)
             } else {
                 pause.setImageResource(R.drawable.pause_icon)
                 player.play()
-                current = tracker.currentSecond
+                current = (tracker.currentSecond/60).toInt()
                 listener.onVideoStateChanged(false, current)
             }
         }
