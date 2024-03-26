@@ -2,10 +2,8 @@ package com.mkandeel.youtubeplayer
 
 import android.content.Context
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.PopupMenu
 
 import android.widget.RelativeLayout
@@ -24,7 +22,8 @@ class PlayerUIController(
     private val playerView: YouTubePlayerView,
     private var tracker: YouTubePlayerTracker,
     private val context: Context,
-    private val listener: VideoStateChanged
+    private val listener: VideoStateChanged,
+    private val youtubeListener: WatchOnYoutubeListener
 ) : AbstractYouTubePlayerListener() {
     private var isFullScreen = false
     private var current = 0
@@ -42,6 +41,7 @@ class PlayerUIController(
         val fullscreen = view.findViewById<ImageButton>(R.id.btn_fullscreen)
         val pause = view.findViewById<ImageButton>(R.id.btn_pause)
         val menu = view.findViewById<ImageButton>(R.id.more_icon)
+        val youtube = view.findViewById<ImageButton>(R.id.btn_youtube)
 
         player.addListener(seekbar)
 
@@ -92,6 +92,10 @@ class PlayerUIController(
                 current = (tracker.currentSecond/60).toInt()
                 listener.onVideoStateChanged(false, current)
             }
+        }
+
+        youtube.setOnClickListener {
+            youtubeListener.onYoutubeClickListener(true)
         }
 
         fullscreen.setOnClickListener {

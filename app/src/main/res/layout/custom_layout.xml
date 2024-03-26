@@ -32,11 +32,20 @@
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.customui.views.YouTubePlayerSeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:fontSize="15sp"
-            android:layout_toStartOf="@id/btn_fullscreen"
+            app:fontSize="@dimen/_12ssp"
+            android:layout_toStartOf="@id/btn_youtube"
             android:layout_alignParentBottom="true"
             android:id="@+id/seekBarPlayer"/>
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/youtube_icon"
+            android:layout_toStartOf="@id/btn_fullscreen"
+            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/_5sdp"
+            android:id="@+id/btn_youtube"/>
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +54,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:id="@+id/btn_fullscreen"
-            android:padding="7dp"/>
+            android:padding="@dimen/_5sdp"/>
 
     </RelativeLayout>
 

@@ -12,14 +12,17 @@
         android:id="@+id/container">
 
         <ImageButton
+            android:id="@+id/more_icon"
             android:layout_width="wrap_content"
-            android:background="@android:color/transparent"
             android:layout_height="wrap_content"
-            android:src="@drawable/more_icon"
-            android:layout_margin="@dimen/_7sdp"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:id="@+id/more_icon"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/more_icon" />
 
         <ImageButton
             android:id="@+id/btn_pause"
@@ -33,9 +36,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:fontSize="@dimen/_15ssp"
-            android:layout_toStartOf="@id/btn_fullscreen"
+            android:layout_toStartOf="@id/btn_youtube"
             android:layout_alignParentBottom="true"
             android:id="@+id/seekBarPlayer"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/youtube_icon"
+            android:layout_toStartOf="@id/btn_fullscreen"
+            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/_7sdp"
+            android:id="@+id/btn_youtube"/>
 
         <ImageButton
             android:layout_width="wrap_content"

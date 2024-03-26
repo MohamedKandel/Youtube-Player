@@ -1,5 +1,9 @@
 package com.mkandeel.youtubeplayer
 
+import android.R.id
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -12,10 +16,11 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.loadOrC
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 
-class MainActivity : AppCompatActivity(), VideoStateChanged {
+class MainActivity : AppCompatActivity(), VideoStateChanged, WatchOnYoutubeListener {
 
     private lateinit var player: YouTubePlayer
     private lateinit var tracker: YouTubePlayerTracker
+    private val videoUrl = "https://www.youtube.com/watch?v=KW8S7NOSYwc&list=PLzZol22jG6OeX8H-PdrOUtpnqYl-vLiWd"
 
     // don't use viewBinding in this code
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,11 +44,12 @@ class MainActivity : AppCompatActivity(), VideoStateChanged {
                     youTubePlayerView,
                     tracker,
                     this@MainActivity,
+                    this@MainActivity,
                     this@MainActivity
                 )
                 youTubePlayer.addListener(uiController)
                 youTubePlayer.loadOrCueVideo(
-                    lifecycle, getVideoID("https://www.youtube.com/watch?v=KW8S7NOSYwc&list=PLzZol22jG6OeX8H-PdrOUtpnqYl-vLiWd"), 0f
+                    lifecycle, getVideoID(videoUrl), 0f
                 )
                 player = youTubePlayer
             }
@@ -68,5 +74,25 @@ class MainActivity : AppCompatActivity(), VideoStateChanged {
     // listener for pause and resume video and get current time in minutes
     override fun onVideoStateChanged(isPaused: Boolean, currentTime: Int) {
         Log.v("Video State", "$isPaused at $currentTime")
+    }
+
+    override fun onYoutubeClickListener(isClicked: Boolean) {
+        if (isClicked) {
+            player.pause()
+            val appIntent = Intent(
+                Intent.ACTION_VIEW, Uri.parse(
+                    "vnd.youtube:${getVideoID(videoUrl)}"
+                )
+            )
+            val webIntent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("http://www.youtube.com/watch?v=${getVideoID(videoUrl)}")
+            )
+            try {
+                startActivity(appIntent)
+            } catch (ex: ActivityNotFoundException) {
+                startActivity(webIntent)
+            }
+        }
     }
 }
