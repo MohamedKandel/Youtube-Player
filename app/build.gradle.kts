@@ -51,4 +51,5 @@ dependencies {
     implementation("com.pierfrancescosoffritti.androidyoutubeplayer:custom-ui:12.1.0")
     implementation("com.intuit.ssp:ssp-android:1.1.0")
     implementation("com.intuit.sdp:sdp-android:1.1.0")
+    implementation("com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0")
 }

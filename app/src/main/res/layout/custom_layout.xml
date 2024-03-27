@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root">
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#46000000"
-        android:id="@+id/container">
+        android:background="#46000000">
 
         <ImageButton
+            android:id="@+id/more_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/more_icon"
-            android:layout_margin="@dimen/_7sdp"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:id="@+id/more_icon"/>
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/_7sdp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/more_icon" />
 
         <ImageButton
             android:id="@+id/btn_pause"
@@ -28,33 +28,72 @@
             android:layout_centerInParent="true"
             android:background="@android:color/transparent"
             android:src="@drawable/pause_icon" />
-        
+
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.customui.views.YouTubePlayerSeekBar
+            android:id="@+id/seekBarPlayer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:fontSize="@dimen/_12ssp"
-            android:layout_toStartOf="@id/btn_youtube"
             android:layout_alignParentBottom="true"
-            android:id="@+id/seekBarPlayer"/>
+            android:layout_toStartOf="@id/btn_youtube"
+            app:fontSize="@dimen/_12ssp" />
 
         <ImageButton
+            android:id="@+id/btn_youtube"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/youtube_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@id/btn_setting"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/youtube_icon" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_above="@id/btn_setting"
+            android:layout_toStartOf="@id/btn_fullscreen"
+            android:layout_toEndOf="@id/btn_youtube"
+            app:cardCornerRadius="@dimen/_12sdp"
+            app:contentPadding="@dimen/_7sdp"
+            android:visibility="gone">
+
+            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_70sdp">
+
+                <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                    android:id="@+id/volume"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:max="100"
+                    android:progress="100"
+                    android:progressDrawable="@drawable/seekbar_drawable"
+                    android:splitTrack="false"
+                    android:thumbTint="@android:color/transparent"
+                    app:seekBarRotation="CW270" />
+            </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+        </androidx.cardview.widget.CardView>
+
+        <ImageButton
+            android:id="@+id/btn_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_toStartOf="@id/btn_fullscreen"
             android:background="@android:color/transparent"
-            android:layout_alignParentBottom="true"
             android:padding="@dimen/_5sdp"
-            android:id="@+id/btn_youtube"/>
+            android:src="@drawable/volume_icon" />
+
         <ImageButton
+            android:id="@+id/btn_fullscreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/full_screen_icon"
-            android:background="@android:color/transparent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:id="@+id/btn_fullscreen"
-            android:padding="@dimen/_5sdp"/>
+            android:background="@android:color/transparent"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/full_screen_icon" />
 
     </RelativeLayout>
 
